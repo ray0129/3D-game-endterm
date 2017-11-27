@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Project/Scenes/Game.unity
+- path: Assets/Game_HsunYuan.unity
   isLoaded: 1
   isActive: 1
