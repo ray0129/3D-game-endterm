@@ -22,12 +22,12 @@ public class MineManager : MonoBehaviour {
 		}
 		Debug.Log ("mine count = " + mines.Length.ToString ());
 
-
+		/*
 		//test for array;
 		mines [0,0].GetComponent<Renderer> ().material.color = temp;
 		mines [0,1].GetComponent<Renderer> ().material.color = temp;
 		mines [0,2].GetComponent<Renderer> ().material.color = temp;
 		mines [0,4].GetComponent<Renderer> ().material.color = temp;
-
+		*/
 	}
 }
