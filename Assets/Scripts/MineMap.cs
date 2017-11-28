@@ -19,7 +19,7 @@ public class MineMap : MonoBehaviour {
 
 	void Start(){
 
-		itsMine = Random.value < 0.15; //random generate mines
+		itsMine = Random.value < 0.2; //random generate mines
 		rend = GetComponent<Renderer> ();
 
 	}
@@ -78,7 +78,7 @@ public class MineMap : MonoBehaviour {
 				MineManager.hit [i, j] = true;
 				MineManager.mines [i, j].GetComponent<Renderer> ().material.color = hitColor;
 				gameObject.GetComponentInParent<MineManager> ().AddScore (count);
-			}else{
+			}else if(MineManager.hit[i,j] != true){
 				MineManager.mines [i, j].GetComponent<Renderer> ().material.color = hoverColor; //change color
 			}
 			if (count == 0) { //周圍沒mines
