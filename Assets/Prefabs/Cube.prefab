@@ -215,7 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverColor: {r: 0, g: 0, b: 0, a: 0}
   Mine: {r: 1, g: 0, b: 0, a: 0}
-  MineNearBy: {r: 0, g: 0, b: 0, a: 0}
+  hitColor: {r: 0.375, g: 0.375, b: 0.375, a: 0}
   itsMine: 0
   MinesCount: {fileID: 114601417786915216}
   x: 0

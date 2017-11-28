@@ -1,15 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MineManager : MonoBehaviour {
 
 	public static Transform[,] mines;//static to access any where
 	public static bool[,] used;
+	public static bool[,] hit;
 
 	public Color Safe;
 	public Color Mine;
 
+	public Text ScoreText;
+	private int score;
+
+	public Text HitMineText;
+	private int HitMineCount;
 
 	public static int ColRow;
 
@@ -17,10 +24,12 @@ public class MineManager : MonoBehaviour {
 		ColRow = (int)Mathf.Sqrt (transform.childCount);
 		mines = new Transform[ColRow,ColRow]; //make the array for wavepoints
 		used = new bool[ColRow,ColRow];
+		hit = new bool[ColRow,ColRow];
 
 		for (int i = 0; i < ColRow; i++) {
 			for (int j = 0; j < ColRow; j++) {
 				used [i,j] = false;
+				hit [i, j] = false;
 				mines [i,j] = transform.GetChild (i*ColRow + j);
 				mines [i,j].GetComponent<MineMap> ().x = i;
 				mines [i,j].GetComponent<MineMap> ().y = j;
@@ -37,29 +46,23 @@ public class MineManager : MonoBehaviour {
 		*/
 	}
 
-	/*
-	public void recursive(int i, int j){
-		MM.used [i, j] = true;
+	void Start(){
+		score = 0;
+		ScoreText.text = "Score:" + score;
 
-		if (MineManager.mines[i,j].GetComponent<MineMap>().itsMine) {
-			MineManager.mines[i,j].GetComponent<Renderer>().material.color = MineManager.mines[i,j].GetComponent<MineMap>().Mine; //change to mine color
-		}else {
-			MineManager.mines[i,j].GetComponent<Renderer>().material.color = MineManager.mines[i,j].GetComponent<MineMap>().hoverColor;//change to safe color
-			if (i > 0 && MineManager.used [i - 1, j] == false) {
-				recursive (i - 1, j); //down
-			}
-			if (j > 0 && MineManager.used [i, j - 1] == false) {
-				recursive (i, j - 1); //go left
-			}
-			if (i < MineManager.ColRow - 1 && MineManager.used [i + 1, j] == false) { //go up
-				recursive (i + 1, j);
-			}
-			if (i < MineManager.ColRow - 1 && MineManager.used [i, j + 1] == false) { //go right
-				recursive (i, j + 1);
-			}
-		}
+		HitMineCount = 0;
+		HitMineText.text = "HitMines" + HitMineCount;
 
-	}*/
+	}
 
+	public void AddScore(int count){
+		score += count;
+		ScoreText.text = "Score:" + score;
+	}
+
+	public void HitMines(){
+		HitMineCount++;
+		HitMineText.text = "HitMines" + HitMineCount;
+	}
 }
 

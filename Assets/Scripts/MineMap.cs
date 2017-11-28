@@ -7,7 +7,7 @@ public class MineMap : MonoBehaviour {
 
 	public Color hoverColor;
 	public Color Mine;
-	public Color MineNearBy;
+	public Color hitColor;
 
 	private Renderer rend;
 
@@ -23,18 +23,19 @@ public class MineMap : MonoBehaviour {
 		rend = GetComponent<Renderer> ();
 
 	}
-
+	/*
 	void OnMouseDown(){ //will need to modify to OnClosion or OnTrigger
 		Debug.Log("Find myself at:" + x.ToString() + " " + y.ToString() );
 
 		recursive (x, y);
-	}
+	}*/
 
 	void recursive(int i, int j){
 		MineManager.used [i, j] = true;
 
 		if (MineManager.mines[i,j].GetComponent<MineMap>().itsMine) {
-			MineManager.mines[i,j].GetComponent<Renderer>().material.color = MineManager.mines[i,j].GetComponent<MineMap>().Mine; //change to mine color
+			MineManager.mines[i,j].GetComponent<Renderer>().material.color = Mine; //change to mine color
+			gameObject.GetComponentInParent<MineManager> ().HitMines();
 		}else {
 			//檢查周圍有無mines
 		
@@ -73,9 +74,15 @@ public class MineMap : MonoBehaviour {
 					count++;
 			}
 
+			if (i == x && j == y && count != 0 && MineManager.hit [i, j] == false) {
+				MineManager.hit [i, j] = true;
+				MineManager.mines [i, j].GetComponent<Renderer> ().material.color = hitColor;
+				gameObject.GetComponentInParent<MineManager> ().AddScore (count);
+			}else{
+				MineManager.mines [i, j].GetComponent<Renderer> ().material.color = hoverColor; //change color
+			}
 			if (count == 0) { //周圍沒mines
 
-				MineManager.mines [i, j].GetComponent<Renderer> ().material.color = MineManager.mines [i, j].GetComponent<MineMap> ().hoverColor;//change to safe color
 				if (i > 0 && MineManager.used [i - 1, j] == false) { //down
 					recursive (i - 1, j);
 				}
@@ -91,11 +98,15 @@ public class MineMap : MonoBehaviour {
 			} else { //有mines
 				Debug.Log(x.ToString() + " " + y.ToString() + "have " + count.ToString() + " mines");
 				MineManager.mines [i, j].GetComponent<MineMap> ().MinesCount.text = "" + count;
-				MineManager.mines [i, j].GetComponent<Renderer> ().material.color = MineNearBy;
 			}
 		}
 
 	}
 
+	void OnTriggerEnter(Collider col){
+		Debug.Log("Find myself at:" + x.ToString() + " " + y.ToString() );
+		Destroy (col.gameObject);
+		recursive (x, y);
+	}
 
 }
