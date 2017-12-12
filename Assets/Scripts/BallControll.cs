@@ -6,6 +6,7 @@ public class BallControll : MonoBehaviour {
 	public GameObject balls;
 	public float time;
 	public float Destroy_time = 3;
+	public GameObject cam;
 	// Use this for initialization
 	void Start () {
 

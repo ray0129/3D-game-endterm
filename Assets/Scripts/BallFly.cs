@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class BallFly : MonoBehaviour {
 	public float speed = 0.1f;
+	public Rigidbody rb;
 	// Use this for initialization
 	void Start () {
-		
+		rb = GetComponent<Rigidbody> ();
+		rb.AddForce (transform.forward * speed);
+		rb.AddForce (0, 30, 0);
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		this.transform.Translate(new Vector3(0,0,speed));
+	void FixedUpdate () {
+		
 	}
 	private void OnCollisionEnter(Collision collision){
 		if (collision.gameObject.tag == "Constraint") {
