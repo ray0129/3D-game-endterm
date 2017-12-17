@@ -9,7 +9,6 @@ public class BallFly : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
 		rb.AddForce (transform.forward * speed);
-		rb.AddForce (0, 30, 0);
 	}
 	
 	// Update is called once per frame

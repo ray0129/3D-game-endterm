@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Polylised - Medieval Desert City/Demo/Start_01.unity
+    guid: 5ec4d1f5c46d2b74189d01412f2b5d83
+  - enabled: 1
+    path: Assets/Polylised - Medieval Desert City/Demo/Demo_01.unity
+    guid: 6c9792811fb08fb4882e17eb56f4bb8c
