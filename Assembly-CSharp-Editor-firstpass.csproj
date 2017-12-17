@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{321AE6E1-857A-DC85-727B-DCE72CBA7329}</ProjectGuid>
+    <ProjectGuid>{4B05AB48-C3D4-7A93-1E82-39521C8AEF70}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor-firstpass</AssemblyName>
@@ -56,7 +56,10 @@
      <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
      <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
      <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
+<<<<<<< HEAD
      <None Include="Assets\FreeWeapons\Read_me.txt" />
+=======
+>>>>>>> origin/merge_test2
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -127,6 +130,7 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
+<<<<<<< HEAD
  <HintPath>C:/Users/asus/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@1.0.7/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
@@ -140,11 +144,26 @@
  </Reference>
  <Reference Include="UnityEditor.Purchasing">
  <HintPath>C:/Users/asus/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/Editor/UnityEditor.Purchasing.dll</HintPath>
+=======
+ <HintPath>C:/Users/User/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@1.0.7/Editor/UnityEditor.Advertisements.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Users/User/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Analytics">
+ <HintPath>C:/Users/User/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/Editor/UnityEditor.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Purchasing">
+ <HintPath>C:/Users/User/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Purchasing">
+ <HintPath>C:/Users/User/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/Editor/UnityEditor.Purchasing.dll</HintPath>
+>>>>>>> origin/merge_test2
  </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{52E553AF-3335-15A1-3B1B-8661C04F004C}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{451041D1-3923-9A00-E3B4-60CED270A1CD}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
