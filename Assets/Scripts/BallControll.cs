@@ -21,7 +21,13 @@ public class BallControll : MonoBehaviour {
 	void Update () {
 		time += Time.deltaTime;
 		if (time > 0.5f) {
-			if (Input.GetMouseButton (0)) {
+			if(Input.GetKey(KeyCode.CapsLock)){
+
+				cSpeed = 0f;
+				slider.value = 0;
+
+
+			}else if (Input.GetMouseButton (0)) {
 				if (cSpeed < maxSpeed) {
 					float amount = Time.deltaTime * increase_speed;
 					cSpeed += amount;
@@ -29,7 +35,7 @@ public class BallControll : MonoBehaviour {
 				} else {
 					cSpeed = maxSpeed;
 				}
-			} else {
+			} else{
 				if (cSpeed > 0f) {
 					cSpeed += minSpeed;
 					BallFly.speed = cSpeed;
