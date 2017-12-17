@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BallFly : MonoBehaviour {
-	public float speed = 0.1f;
+	static public float speed = 0.1f;
 	public Rigidbody rb;
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
 		rb.AddForce (transform.forward * speed);
-		rb.AddForce (0, 30, 0);
+
 	}
 	
 	// Update is called once per frame
