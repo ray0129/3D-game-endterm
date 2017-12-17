@@ -23,8 +23,9 @@ public class BallControll : MonoBehaviour {
 		if (time > 0.5f) {
 			if (Input.GetMouseButton (0)) {
 				if (cSpeed < maxSpeed) {
-					cSpeed += Time.deltaTime * increase_speed;
-					slider.value += Time.deltaTime * increase_speed;
+					float amount = Time.deltaTime * increase_speed;
+					cSpeed += amount;
+						slider.value += 100 * amount / maxSpeed;
 				} else {
 					cSpeed = maxSpeed;
 				}
