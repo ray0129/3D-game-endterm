@@ -28,9 +28,10 @@ public class BallControll : MonoBehaviour {
 	public Text TimeCountDownText;
 	public Text ArrowRemainText;
 
-	//104703035
+	//104703034
 	public GameObject direction;
 	private int x=0;
+	private int RandDir;
 	
 	// Use this for initialization
 	void Start () {
@@ -38,12 +39,25 @@ public class BallControll : MonoBehaviour {
 
 		isGameStart = false;
 		currentTime = TurnTime;
+	//	RandDir = Random.Range (0, 7);
+	//	direction.transform.Rotate (0, 0,(j-x)*45);
 	}
 
 	// Update is called once per frame
 	void Update () {
-<<<<<<< HEAD
 	/*	time += Time.deltaTime;
+
+
+		int j = Random.Range (0, 7);
+		time += Time.deltaTime;
+		if (time > 0.5f) {
+			if (Input.GetKeyUp (KeyCode.Mouse0)) {
+				direction.transform.Rotate (0, 0,(j-x)*45);
+				Debug.Log(j);
+				x = j;
+				Destroy(Instantiate (balls, this.transform.position, this.transform.rotation),Destroy_time);
+
+
 		if (time > 0.5f) {
 			if (Input.GetMouseButton (0)) {
 				if (cSpeed < maxSpeed) {
@@ -63,6 +77,7 @@ public class BallControll : MonoBehaviour {
 				}
 			}
 		}*/
+		
 
 		if (true) {
 			if (isShooting == false) {
@@ -112,16 +127,7 @@ public class BallControll : MonoBehaviour {
 					cSpeed = 0f;
 					slider.value = 0;
 				}
-=======
-		int j = Random.Range (0, 7);
-		time += Time.deltaTime;
-		if (time > 0.5f) {
-			if (Input.GetKeyUp (KeyCode.Mouse0)) {
-				direction.transform.Rotate (0, 0,(j-x)*45);
-				Debug.Log(j);
-				x = j;
-				Destroy(Instantiate (balls, this.transform.position, this.transform.rotation),Destroy_time);
->>>>>>> origin/direction
+
 			}
 		}
 
@@ -129,6 +135,13 @@ public class BallControll : MonoBehaviour {
 
 	void Turn(){
 		TurnCount--;
+
+		RandDir = Random.Range (0, 7);
+		direction.transform.Rotate (0, 0,(RandDir-x)*45);
+
+
+
+
 		ArrowRemainText.text = "Remain:" + TurnCount.ToString ();
 		if (TurnCount == 0) { // game end
 			Debug.Log ("Game End -> Result");

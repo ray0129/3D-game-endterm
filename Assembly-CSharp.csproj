@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\changescence.cs" />
      <Compile Include="Assets\Scripts\BallControll.cs" />
      <Compile Include="Assets\Scripts\BallFly.cs" />
      <Compile Include="Assets\Scripts\MineManager.cs" />
