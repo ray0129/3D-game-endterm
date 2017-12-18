@@ -11,7 +11,7 @@ public class BallControll : MonoBehaviour
 	public float maxSpeed = 150f;
 	public float minSpeed = 3f;
 	public float cSpeed = 0f;
-	public float increase_speed = 50f;
+	public float increase_speed = 300f;
 	public GameObject cam;
 	public Slider slider;
 
@@ -29,14 +29,18 @@ public class BallControll : MonoBehaviour
 	private float temp;
 	public Text TimeCountDownText;
 	public Text ArrowRemainText;
+    public static int RunTurn= 0;
 
-	//104703034
-	public GameObject direction;
+    //104703034
+    public GameObject direction;
 	private int x = 0;
 	private int RandDir;
-	
-	// Use this for initialization
-	void Start ()
+
+    
+
+
+    // Use this for initialization
+    void Start ()
 	{
 		slider.value = 0;
 
@@ -146,6 +150,7 @@ public class BallControll : MonoBehaviour
 	void Turn ()
 	{
 		TurnCount--;
+        RunTurn++;
 
 		RandDir = Random.Range (0, 7);
 		direction.transform.Rotate (0,0,(RandDir - x) * 45);
