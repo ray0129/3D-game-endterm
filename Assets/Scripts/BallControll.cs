@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BallControll : MonoBehaviour {
+public class BallControll : MonoBehaviour
+{
 	public GameObject balls;
 	public float time;
 	public float Destroy_time = 3;
@@ -15,7 +16,8 @@ public class BallControll : MonoBehaviour {
 	public Slider slider;
 
 	//wind
-	public static float WindX; //range 0.1~1f
+	public static float WindX;
+	//range 0.1~1f
 	public static float WindY;
 	public static float WindZ;
 	//turn & gameControl
@@ -30,22 +32,24 @@ public class BallControll : MonoBehaviour {
 
 	//104703034
 	public GameObject direction;
-	private int x=0;
+	private int x = 0;
 	private int RandDir;
 	
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		slider.value = 0;
 
 		isGameStart = false;
 		currentTime = TurnTime;
-	//	RandDir = Random.Range (0, 7);
-	//	direction.transform.Rotate (0, 0,(j-x)*45);
+		//	RandDir = Random.Range (0, 7);
+		//	direction.transform.Rotate (0, 0,(j-x)*45);
 	}
 
 	// Update is called once per frame
-	void Update () {
-	/*	time += Time.deltaTime;
+	void Update ()
+	{
+		/*	time += Time.deltaTime;
 
 
 		int j = Random.Range (0, 7);
@@ -77,24 +81,29 @@ public class BallControll : MonoBehaviour {
 				}
 			}
 		}*/
-		
+	
 
 		if (true) {
 			if (isShooting == false) {
 				currentTime -= Time.deltaTime;
-		//		TurnTime = Mathf.Clamp (TurnTime, 0f, Mathf.Infinity);
-				TimeCountDownText.text = string.Format ("{0:00.00}",currentTime);
+				//		TurnTime = Mathf.Clamp (TurnTime, 0f, Mathf.Infinity);
+				TimeCountDownText.text = string.Format ("{0:00.00}", currentTime);
 			}
 			if (currentTime < 0) { // time is up
 				
 				Turn ();
 				currentTime = TurnTime;
 			}
-				
-			if (Input.GetMouseButton (0) && isShooting == false) {
+			if (Input.GetKey (KeyCode.CapsLock)) {
+				cSpeed = 0;
+				slider.value = 0;
+			
+			} 
+			if (Input.GetMouseButton (0) && isShooting == false ) {
 				if (cSpeed < maxSpeed) {
-					cSpeed += Time.deltaTime * increase_speed;
-					slider.value += Time.deltaTime * increase_speed;
+					float amount = Time.deltaTime * increase_speed;
+					cSpeed += amount;
+					slider.value += 100 * amount / maxSpeed;
 				} else {
 					cSpeed = maxSpeed;
 				}
@@ -104,7 +113,7 @@ public class BallControll : MonoBehaviour {
 				if (temp > 0) {
 					temp -= Time.deltaTime;
 				}
-				if (temp <= 0 || GameObject.FindGameObjectWithTag("Ball") == null) {
+				if (temp <= 0 || GameObject.FindGameObjectWithTag ("Ball") == null) {
 					isShooting = false;
 				}
 
@@ -112,7 +121,7 @@ public class BallControll : MonoBehaviour {
 				if (cSpeed > 0f) {
 					isShooting = true;
 					currentTime = TurnTime;
-					TimeCountDownText.text = string.Format ("{0:00.00}",currentTime);
+					TimeCountDownText.text = string.Format ("{0:00.00}", currentTime);
 
 
 					cSpeed += minSpeed;
@@ -120,7 +129,7 @@ public class BallControll : MonoBehaviour {
 
 					temp = Destroy_time;
 
-					Destroy(Instantiate (balls, this.transform.position, this.transform.rotation),Destroy_time);
+					Destroy (Instantiate (balls, this.transform.position, this.transform.rotation), Destroy_time);
 
 					Turn ();
 					time = 0f;
@@ -129,15 +138,17 @@ public class BallControll : MonoBehaviour {
 				}
 
 			}
+		
 		}
 
 	}
 
-	void Turn(){
+	void Turn ()
+	{
 		TurnCount--;
 
 		RandDir = Random.Range (0, 7);
-		direction.transform.Rotate (0, 0,(RandDir-x)*45);
+		direction.transform.Rotate (0, 0, (RandDir - x) * 45);
 
 
 
@@ -149,7 +160,8 @@ public class BallControll : MonoBehaviour {
 
 	}
 
-	public void GameStart(){
+	public void GameStart ()
+	{
 		isGameStart = true;
 	}
 
