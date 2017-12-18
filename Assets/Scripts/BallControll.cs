@@ -156,7 +156,8 @@ public class BallControll : MonoBehaviour
 		TurnCount--;
 
 		RandDir = Random.Range (0, 7);
-		direction.transform.Rotate (0, 0, (RandDir - x) * 45);
+		direction.transform.Rotate (0,0,(RandDir - x) * 45);
+
 
 
 
