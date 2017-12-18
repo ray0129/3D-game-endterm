@@ -13,7 +13,7 @@ public class MineManager : MonoBehaviour {
 	public Color Mine;
 
 	public Text ScoreText;
-	private int score;
+	public static int score;
 
 	public Text HitMineText;
 	private int HitMineCount;
@@ -48,21 +48,25 @@ public class MineManager : MonoBehaviour {
 
 	void Start(){
 		score = 0;
-		ScoreText.text = "Score:" + score;
+		ScoreText.text = "Score:" + score.ToString();
 
 		HitMineCount = 0;
-		HitMineText.text = "HitMines" + HitMineCount;
+		HitMineText.text = "HitMines" + HitMineCount.ToString();
 
 	}
 
 	public void AddScore(int count){
 		score += count;
-		ScoreText.text = "Score:" + score;
+		ScoreText.text = "Score:" + score.ToString();
 	}
 
 	public void HitMines(){
 		HitMineCount++;
-		HitMineText.text = "HitMines" + HitMineCount;
+		HitMineText.text = "HitMines" + HitMineCount.ToString();
+
+		//hitMines -> Score -= 2
+		score -= 2;
+		ScoreText.text = "Score:" + score;
 	}
 }
 

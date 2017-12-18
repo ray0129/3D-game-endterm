@@ -34,6 +34,10 @@ public class BallControll : MonoBehaviour
 	public GameObject direction;
 	private int x = 0;
 	private int RandDir;
+
+	//for GameResult UI
+	public GameObject gameResultUI;
+
 	
 	// Use this for initialization
 	void Start ()
@@ -141,6 +145,10 @@ public class BallControll : MonoBehaviour
 		
 		}
 
+		if (Input.GetKeyDown (KeyCode.Q)) {
+			EndGame ();
+		}
+
 	}
 
 	void Turn ()
@@ -155,7 +163,8 @@ public class BallControll : MonoBehaviour
 
 		ArrowRemainText.text = "Remain:" + TurnCount.ToString ();
 		if (TurnCount == 0) { // game end
-			Debug.Log ("Game End -> Result");
+	//		Debug.Log ("Game End -> Result");
+			EndGame ();
 		}
 
 	}
@@ -165,8 +174,9 @@ public class BallControll : MonoBehaviour
 		isGameStart = true;
 	}
 
-
-
-
+	void EndGame(){ //game end and show Result
+		gameResultUI.SetActive(true);
+	}
+		
 
 }

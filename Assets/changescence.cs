@@ -12,7 +12,10 @@ public class changescence : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		Cursor.visible = true;
+		if (Cursor.lockState != CursorLockMode.None) {
+			Cursor.lockState = CursorLockMode.None;
+		}
 	}
     public void start()
     {
