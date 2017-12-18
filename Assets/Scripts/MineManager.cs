@@ -20,6 +20,8 @@ public class MineManager : MonoBehaviour {
 
 	public static int ColRow;
 
+    public int MineNumber = 8;
+
 	void Awake(){
 		ColRow = (int)Mathf.Sqrt (transform.childCount);
 		mines = new Transform[ColRow,ColRow]; //make the array for wavepoints
@@ -53,6 +55,30 @@ public class MineManager : MonoBehaviour {
 		HitMineCount = 0;
 		HitMineText.text = "HitMines" + HitMineCount.ToString();
 
+        for (int i = 0; i < ColRow; i++)//預設為空白
+        {
+            for (int j = 0; j < ColRow; j++)
+            {
+                MineManager.mines[i, j].GetComponent<MineMap>().itsMine=false;
+
+            }
+        }
+
+        for(int k = 0; k < MineNumber; k++)//設置地雷
+        {
+            int i = (int)Random.Range(0, ColRow);
+            int j = (int)Random.Range(0, ColRow);
+
+            if (MineManager.mines[i, j].GetComponent<MineMap>().itsMine == false)
+            {
+                MineManager.mines[i, j].GetComponent<MineMap>().itsMine = true;
+            }
+            else if(MineManager.mines[i, j].GetComponent<MineMap>().itsMine == true)
+            {
+                k--;
+            }
+            
+        }
 	}
 
 	public void AddScore(int count){

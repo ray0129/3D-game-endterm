@@ -29,9 +29,10 @@ public class BallControll : MonoBehaviour
 	private float temp;
 	public Text TimeCountDownText;
 	public Text ArrowRemainText;
+    public static int RunTurn= 0;
 
-	//104703034
-	public GameObject direction;
+    //104703034
+    public GameObject direction;
 	private int x = 0;
 	private int RandDir;
 
@@ -154,6 +155,7 @@ public class BallControll : MonoBehaviour
 	void Turn ()
 	{
 		TurnCount--;
+        RunTurn++;
 
 		RandDir = Random.Range (0, 7);
 		direction.transform.Rotate (0,0,(RandDir - x) * 45);
