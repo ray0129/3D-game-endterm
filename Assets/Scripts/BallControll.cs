@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +11,7 @@ public class BallControll : MonoBehaviour
 	public float maxSpeed = 150f;
 	public float minSpeed = 3f;
 	public float cSpeed = 0f;
-	public float increase_speed = 50f;
+	public float increase_speed = 300f;
 	public GameObject cam;
 	public Slider slider;
 
@@ -29,6 +29,7 @@ public class BallControll : MonoBehaviour
 	private float temp;
 	public Text TimeCountDownText;
 	public Text ArrowRemainText;
+    public static int RunTurn= 0;
 
 	//104703034
 	public GameObject direction;
@@ -39,6 +40,7 @@ public class BallControll : MonoBehaviour
 	
 	// Use this for initialization
 	void Start ()
+
 	{
 		slider.value = 0;
 
@@ -148,6 +150,7 @@ public class BallControll : MonoBehaviour
 	void Turn ()
 	{
 		TurnCount--;
+        RunTurn++;
 
 		Wind = RandDir;
 		RandDir = Random.Range (0, 7);

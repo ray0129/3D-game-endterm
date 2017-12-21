@@ -19,7 +19,7 @@ public class MineMap : MonoBehaviour {
 
 	void Start(){
 
-		itsMine = Random.value < 0.2; //random generate mines
+		//itsMine = Random.value < 0.2; //random generate mines
 		rend = GetComponent<Renderer> ();
 
 	}
@@ -82,8 +82,9 @@ public class MineMap : MonoBehaviour {
 				MineManager.mines [i, j].GetComponent<Renderer> ().material.color = hoverColor; //change color
 			}
 			if (count == 0) { //周圍沒mines
+                MineManager.mines[i, j].GetComponent<Renderer>().material.color = hitColor;
 
-				if (i > 0 && MineManager.used [i - 1, j] == false) { //down
+                if (i > 0 && MineManager.used [i - 1, j] == false) { //down
 					recursive (i - 1, j);
 				}
 				if (j > 0 && MineManager.used [i, j - 1] == false) { //go left
@@ -95,6 +96,21 @@ public class MineMap : MonoBehaviour {
 				if (j < MineManager.ColRow - 1 && MineManager.used [i, j + 1] == false) { //go right
 					recursive (i, j + 1);
 				}
+                if (i > 0 && j > 0 && MineManager.used[i - 1, j - 1] == false)//左下
+                {
+                    recursive(i - 1, j - 1);
+                }
+                if (i > 0 && j < MineManager.ColRow - 1 && MineManager.used[i - 1, j + 1] == false)//右下
+                {
+                    recursive(i - 1, j + 1);
+                }
+                if(i < MineManager.ColRow - 1 && j > 0 && MineManager.used[i + 1, j - 1] == false){//左上
+                    recursive(i + 1, j - 1);
+                }
+                if(i < MineManager.ColRow - 1&& j < MineManager.ColRow - 1 && MineManager.used[i + 1, j + 1] == false)//右上
+                {
+                    recursive(i + 1, j + 1);
+                }
 			} else { //有mines
 				Debug.Log(x.ToString() + " " + y.ToString() + "have " + count.ToString() + " mines");
 				MineManager.mines [i, j].GetComponent<MineMap> ().MinesCount.text = "" + count;
@@ -106,7 +122,34 @@ public class MineMap : MonoBehaviour {
 	void OnTriggerEnter(Collider col){
 		Debug.Log("Find myself at:" + x.ToString() + " " + y.ToString() );
 		Destroy (col.gameObject);
-		recursive (x, y);
+        if (BallControll.RunTurn == 1 && itsMine == true)
+        {
+            
+            for (int k = 0; k < 1; k++)//重設地雷
+            {
+                int i = (int)Random.Range(0, MineManager.ColRow);
+                int j = (int)Random.Range(0, MineManager.ColRow);
+
+                if (MineManager.mines[i, j].GetComponent<MineMap>().itsMine == false )
+                {
+                    MineManager.mines[i, j].GetComponent<MineMap>().itsMine = true;
+                }
+                else if (MineManager.mines[i, j].GetComponent<MineMap>().itsMine == true)
+                {
+                    k--;
+                }
+
+            }
+            itsMine = false;
+            recursive(x, y);
+
+        }
+        else
+        {
+            recursive (x, y);
+        }
+
+       
 	}
 
 }
