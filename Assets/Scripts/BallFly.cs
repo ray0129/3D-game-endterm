@@ -20,7 +20,22 @@ public class BallFly : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		int Dir;
+		Dir = BallControll.Wind;
+		if (Dir < 2 || Dir == 7) {
+			WindZ = -1*Random.Range(0.1f,1f);
+		}
+		if (Dir > 2 && Dir < 6) {
+			WindZ = Random.Range(0.1f,1f);
+		}
+		if (Dir > 0 && Dir < 4) {
+			WindX = -1*Random.Range(0.1f,1f);
+		}
+		if (Dir > 4 && Dir <= 7) {
+			WindX = Random.Range(0.1f,1f);
+		}
 		rb.AddForce (WindX, WindY, WindZ); //world location 
+		WindX = WindZ = 0;
 	}
 
 	private void OnCollisionEnter(Collision collision){
