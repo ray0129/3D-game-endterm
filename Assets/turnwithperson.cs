@@ -9,7 +9,9 @@ public class turnwithperson : MonoBehaviour {
 	private float y;
 	public float Xsens;
 	public float Ysens;
-	public float backwardDis;
+	public float backwardDisX;
+	public float backwardDisY;
+	public float backwardDisZ;
 	private Quaternion rotationEuler;
 	private Vector3 camPos;
 
@@ -18,7 +20,7 @@ public class turnwithperson : MonoBehaviour {
 		x = 0;
 		y = 100;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		x -= Input.GetAxis ("Mouse X") * Xsens * Time.deltaTime;
@@ -35,7 +37,7 @@ public class turnwithperson : MonoBehaviour {
 			y = 100;
 		}
 		rotationEuler = Quaternion.Euler (y, 0, x);
-		camPos = new Vector3 (0,backwardDis,0) + target.position;
+		camPos = new Vector3 (backwardDisX,backwardDisY,backwardDisZ) + target.position;
 		transform.rotation = rotationEuler;
 		transform.position = camPos;
 	}

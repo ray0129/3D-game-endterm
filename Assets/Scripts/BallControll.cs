@@ -33,8 +33,10 @@ public class BallControll : MonoBehaviour
 
     //104703034
     public GameObject direction;
+	public Rigidbody rb;
 	private int x = 0;
 	private int RandDir;
+	public static int Wind;
 
 	//for GameResult UI
 	public GameObject gameResultUI;
@@ -154,15 +156,15 @@ public class BallControll : MonoBehaviour
 
 	void Turn ()
 	{
-		TurnCount--;
-        RunTurn++;
-
+		Wind = 0;
+		Wind = RandDir;
 		RandDir = Random.Range (0, 7);
-		direction.transform.Rotate (0,0,(RandDir - x) * 45);
+		direction.transform.Rotate (0,(RandDir - x) * 45,0);
+		Debug.Log (RandDir);
 
-
-
-
+		x = RandDir;
+		TurnCount--;
+		RunTurn++;
 
 		ArrowRemainText.text = "Remain:" + TurnCount.ToString ();
 		if (TurnCount == 0) { // game end

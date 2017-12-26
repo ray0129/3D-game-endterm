@@ -1,12 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BallControll.cs">
     <Files>
-      <File FileName="Assets\Scripts\BallControll.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BallFly.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BallControll.cs" Line="158" Column="3" />
+      <File FileName="Assets\Scripts\BallFly.cs" Line="26" Column="13" />
       <File FileName="Assets\Scripts\MineMap.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\MineManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" Line="64" Column="30" />
+      <File FileName="Assets\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" Line="1" Column="1" />
+      <File FileName="Assets\turnwithperson.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
