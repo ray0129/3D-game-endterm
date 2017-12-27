@@ -54,12 +54,13 @@
      <Compile Include="Assets\barrierMove.cs" />
      <Compile Include="Assets\changescence.cs" />
      <Compile Include="Assets\GameResult.cs" />
-     <Compile Include="Assets\pathPoint.cs" />
      <Compile Include="Assets\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\BallControll.cs" />
      <Compile Include="Assets\Scripts\BallFly.cs" />
+     <Compile Include="Assets\Scripts\LevelSelector.cs" />
      <Compile Include="Assets\Scripts\MineManager.cs" />
      <Compile Include="Assets\Scripts\MineMap.cs" />
+     <Compile Include="Assets\Scripts\pathPoint.cs" />
      <Compile Include="Assets\turnwithperson.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
