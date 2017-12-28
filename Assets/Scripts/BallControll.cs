@@ -12,7 +12,6 @@ public class BallControll : MonoBehaviour
 	public float minSpeed = 3f;
 	public float cSpeed = 0f;
 	public float increase_speed = 50f;
-	public GameObject cam;
 	public Slider slider;
 
 	//wind
@@ -29,11 +28,13 @@ public class BallControll : MonoBehaviour
 	private float temp;
 	public Text TimeCountDownText;
 	public Text ArrowRemainText;
-    public static int RunTurn= 0;
+	public static int RunTurn= 0;
 
-    //104703034
-    public GameObject direction;
-	public Rigidbody rb;
+	//shelter
+	public GameObject shelter;
+
+	//104703034
+	public GameObject direction;
 	private int x = 0;
 	private int RandDir;
 	public static int Wind;
@@ -41,7 +42,10 @@ public class BallControll : MonoBehaviour
 	//for GameResult UI
 	public GameObject gameResultUI;
 
-	
+
+	public Text windrangetext;
+	private bool windChange;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -49,46 +53,15 @@ public class BallControll : MonoBehaviour
 
 		isGameStart = false;
 		currentTime = TurnTime;
-		//	RandDir = Random.Range (0, 7);
-		//	direction.transform.Rotate (0, 0,(j-x)*45);
+
+		ChangeWind ();
+		shelter.GetComponent<changeShelter>().shelterChange();
+
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-		/*	time += Time.deltaTime;
-
-
-		int j = Random.Range (0, 7);
-		time += Time.deltaTime;
-		if (time > 0.5f) {
-			if (Input.GetKeyUp (KeyCode.Mouse0)) {
-				direction.transform.Rotate (0, 0,(j-x)*45);
-				Debug.Log(j);
-				x = j;
-				Destroy(Instantiate (balls, this.transform.position, this.transform.rotation),Destroy_time);
-
-
-		if (time > 0.5f) {
-			if (Input.GetMouseButton (0)) {
-				if (cSpeed < maxSpeed) {
-					cSpeed += Time.deltaTime * increase_speed;
-					slider.value += Time.deltaTime * increase_speed;
-				} else {
-					cSpeed = maxSpeed;
-				}
-			} else {
-				if (cSpeed > 0f) {
-					cSpeed += minSpeed;
-					BallFly.speed = cSpeed;
-					Destroy(Instantiate (balls, this.transform.position, this.transform.rotation),Destroy_time);
-					time = 0f;
-					cSpeed = 0f;
-					slider.value = 0;
-				}
-			}
-		}*/
-	
 
 		if (true) {
 			if (isShooting == false) {
@@ -97,14 +70,14 @@ public class BallControll : MonoBehaviour
 				TimeCountDownText.text = string.Format ("{0:00.00}", currentTime);
 			}
 			if (currentTime < 0) { // time is up
-				
+
 				Turn ();
 				currentTime = TurnTime;
 			}
 			if (Input.GetKey (KeyCode.CapsLock)) {
 				cSpeed = 0;
 				slider.value = 0;
-			
+
 			} 
 			if (Input.GetMouseButton (0) && isShooting == false ) {
 				if (cSpeed < maxSpeed) {
@@ -122,10 +95,18 @@ public class BallControll : MonoBehaviour
 				}
 				if (temp <= 0 || GameObject.FindGameObjectWithTag ("Ball") == null) {
 					isShooting = false;
+					if (windChange) {
+						ChangeWind ();
+						shelter.GetComponent<changeShelter>().shelterChange();
+						//	windChange = false;
+					}
 				}
 
 
 				if (cSpeed > 0f) {
+
+					windChange = true;
+
 					isShooting = true;
 					currentTime = TurnTime;
 					TimeCountDownText.text = string.Format ("{0:00.00}", currentTime);
@@ -142,10 +123,11 @@ public class BallControll : MonoBehaviour
 					time = 0f;
 					cSpeed = 0f;
 					slider.value = 0;
+
 				}
 
 			}
-		
+
 		}
 
 		if (Input.GetKeyDown (KeyCode.Q)) {
@@ -156,19 +138,12 @@ public class BallControll : MonoBehaviour
 
 	void Turn ()
 	{
-		Wind = 0;
-		Wind = RandDir;
-		RandDir = Random.Range (0, 7);
-		direction.transform.Rotate (0,(RandDir - x) * 45,0);
-		Debug.Log (RandDir);
-
-		x = RandDir;
 		TurnCount--;
 		RunTurn++;
 
 		ArrowRemainText.text = "Remain:" + TurnCount.ToString ();
 		if (TurnCount == 0) { // game end
-	//		Debug.Log ("Game End -> Result");
+			//		Debug.Log ("Game End -> Result");
 			EndGame ();
 		}
 
@@ -182,6 +157,34 @@ public class BallControll : MonoBehaviour
 	void EndGame(){ //game end and show Result
 		gameResultUI.SetActive(true);
 	}
-		
 
+	void ChangeWind(){
+
+		windChange = false;
+
+		float Windmix;
+
+		WindX = WindZ = 0;
+		RandDir = Random.Range (0, 7);
+		direction.transform.Rotate (0,(RandDir - x) * 45,0);
+		Debug.Log (RandDir);
+		if (RandDir < 2 || RandDir == 7) {
+			WindZ = -1*Random.Range(0.1f,1f);
+		}
+		if (RandDir > 2 && RandDir < 6) {
+			WindZ = 1*Random.Range(0.1f,1f);
+		}
+		if (RandDir > 0 && RandDir < 4) {
+			WindX = -1*Random.Range(0.1f,1f);
+		}
+		if (RandDir > 4 && RandDir <= 7) {
+			WindX = 1*Random.Range(0.1f,1f);
+		}
+
+		Windmix = Mathf.Sqrt(WindX * WindX + WindZ * WindZ);
+		windrangetext.text = "Wind: " + string.Format ("{0:0.00}", Windmix*5);
+
+		x = RandDir;
+
+	}
 }

@@ -16,8 +16,8 @@ public class BallFly : MonoBehaviour {
 		
 		rb = GetComponent<Rigidbody> ();
 		rb.AddForce (transform.forward * speed);
-		windx = BallControllformission00.WindX;
-		windz = BallControllformission00.WindZ;
+		windx = BallControll.WindX;
+		windz = BallControll.WindZ;
 	}
 	
 	// Update is called once per frame
