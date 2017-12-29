@@ -17,6 +17,9 @@ public class MineMap : MonoBehaviour {
 	public int x;
 	public int y;
 
+	public GameObject HitEffect;
+	public GameObject ExplodeEffect;
+
 	void Start(){
 
 		//itsMine = Random.value < 0.2; //random generate mines
@@ -121,6 +124,13 @@ public class MineMap : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
 		Debug.Log("Find myself at:" + x.ToString() + " " + y.ToString() );
+		if(col.CompareTag("Ball") == true){
+			FindObjectOfType<AudioManger> ().Play ("HitSound");
+			GameObject effectD = (GameObject)Instantiate (HitEffect, col.gameObject.transform.position, col.gameObject.transform.rotation);
+		}else if(col.CompareTag("FireBall") == true){
+			FindObjectOfType<AudioManger> ().Play ("ExplodeSound");
+			GameObject effectD = (GameObject)Instantiate (ExplodeEffect, col.gameObject.transform.position, col.gameObject.transform.rotation);
+		}
 		Destroy (col.gameObject);
         if (BallControll.RunTurn == 1 && itsMine == true)
         {

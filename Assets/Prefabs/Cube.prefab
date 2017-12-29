@@ -220,6 +220,9 @@ MonoBehaviour:
   MinesCount: {fileID: 114601417786915216}
   x: 0
   y: 0
+  HitEffect: {fileID: 1130426029893638, guid: 9a583b7982a409147b9387b699995c29, type: 2}
+  ExplodeEffect: {fileID: 1895221540170572, guid: b51a84ab9e566894894a4615f00f3130,
+    type: 2}
 --- !u!222 &222982225879844194
 CanvasRenderer:
   m_ObjectHideFlags: 1

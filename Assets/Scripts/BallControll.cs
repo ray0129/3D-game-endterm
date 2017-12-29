@@ -56,6 +56,9 @@ public class BallControll : MonoBehaviour
 	public static bool needWind;
 	public static bool needShelter;
 
+	//FireBall
+	public GameObject FireBall;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -91,7 +94,15 @@ public class BallControll : MonoBehaviour
 				currentTime = TurnTime;
 			}
 
-
+			if (Input.GetKeyDown (KeyCode.Alpha1)) {
+				weaponType = 1;
+			}else if(Input.GetKeyDown (KeyCode.Alpha2)){
+				weaponType = 2;
+			}else if(Input.GetKeyDown (KeyCode.Alpha3)){
+				weaponType = 3;
+			}else if(Input.GetKeyDown (KeyCode.Alpha4)){
+				weaponType = 4;
+			}
 
 
 			switch(weaponType){
@@ -150,6 +161,34 @@ public class BallControll : MonoBehaviour
 
 				//Staff;
 				case 2:
+					if (isShooting == true) {
+						//ball destory time
+						if (temp > 0) {
+							temp -= Time.deltaTime;
+						}
+						if (temp <= 0 || GameObject.FindGameObjectWithTag ("FireBall") == null) {
+							isShooting = false;
+							if (windChange) {
+								Turn ();              // <-------------------- 這邊換turn
+								ChangeWind ();
+								shelter.GetComponent<changeShelter> ().shelterChange ();
+							}
+						}
+					}
+					
+					if (Input.GetMouseButtonDown(0) && isShooting == false) {
+						isShooting = true;
+						windChange = true; //下一球需要新的風向
+						
+						//更新剩餘時間並顯示
+						currentTime = TurnTime;   //<------------------這邊更新時間
+						TimeCountDownText.text = string.Format ("{0:00.00}", currentTime);
+						
+						temp = Destroy_time;
+						Destroy (Instantiate (FireBall, this.transform.position, this.transform.rotation), Destroy_time);
+					}
+
+						
 					break;
 
 				//Shuriken;

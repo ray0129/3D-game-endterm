@@ -5,6 +5,7 @@ using UnityEngine;
 public class BallFly : MonoBehaviour {
 	static public float speed = 0.1f;
 	public Rigidbody rb;
+	public GameObject HitEffect;
 	// Use this for initialization
 
 	//wind influence 
@@ -29,6 +30,8 @@ public class BallFly : MonoBehaviour {
 
 	private void OnCollisionEnter(Collision collision){
 		if (collision.gameObject.tag == "Constraint") {
+			FindObjectOfType<AudioManger> ().Play ("HitSound");
+			GameObject effectD = (GameObject)Instantiate (HitEffect, transform.position, transform.rotation);
 			Destroy (this.gameObject);
 		}
 		if (collision.gameObject.tag == "Cube") {
@@ -40,6 +43,8 @@ public class BallFly : MonoBehaviour {
 	//destory ball by trigger
 	private void OnTriggerEnter(Collider col){
 		if (col.CompareTag ("Constraint") == true) {
+			FindObjectOfType<AudioManger> ().Play ("HitSound");
+			GameObject effectD = (GameObject)Instantiate (HitEffect, transform.position, transform.rotation);
 			Destroy (this.gameObject);
 		}
 	}
