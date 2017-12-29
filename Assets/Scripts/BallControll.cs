@@ -56,8 +56,10 @@ public class BallControll : MonoBehaviour
 	public static bool needWind;
 	public static bool needShelter;
 
-	//FireBall
+	//weapon object
 	public GameObject FireBall;
+	public GameObject Shuriken;
+	public GameObject staff;
 
 	// Use this for initialization
 	void Start ()
@@ -94,20 +96,27 @@ public class BallControll : MonoBehaviour
 				currentTime = TurnTime;
 			}
 
-			if (Input.GetKeyDown (KeyCode.Alpha1)) {
+			if(Input.GetKeyDown(KeyCode.Alpha0)){
+				weaponType = 0;
+			}else if (Input.GetKeyDown (KeyCode.Alpha1)) {  //ShotGun
 				weaponType = 1;
-			}else if(Input.GetKeyDown (KeyCode.Alpha2)){
+			}else if(Input.GetKeyDown (KeyCode.Alpha2)){  //staff
 				weaponType = 2;
-			}else if(Input.GetKeyDown (KeyCode.Alpha3)){
+			}else if(Input.GetKeyDown (KeyCode.Alpha3)){  //shuriken
 				weaponType = 3;
-			}else if(Input.GetKeyDown (KeyCode.Alpha4)){
+			}else if(Input.GetKeyDown (KeyCode.Alpha4)){  //detecter
 				weaponType = 4;
 			}
 
+			if (weaponType == 2) {
+				staff.SetActive (true);
+			} else {
+				staff.SetActive (false);
+			}
 
 			switch(weaponType){
-				//basic weapon
-				case 0: 
+				//basic weapon //Shuriken;
+				case 0: case 3:
 					if (Input.GetKey (KeyCode.CapsLock)) {//Capslock取消蓄力
 						cSpeed = 0;
 						slider.value = 0;
@@ -147,7 +156,11 @@ public class BallControll : MonoBehaviour
 							cSpeed += minSpeed;
 							BallFly.speed = cSpeed;
 							temp = Destroy_time;
-							Destroy (Instantiate (balls, this.transform.position, this.transform.rotation), Destroy_time);
+							if(weaponType == 0){
+								Destroy (Instantiate (balls, this.transform.position, this.transform.rotation), Destroy_time);
+							}else{
+								Destroy (Instantiate (Shuriken, this.transform.position, this.transform.rotation), Destroy_time);
+							}
 							time = 0f;
 							cSpeed = 0f;
 							slider.value = 0;
@@ -189,10 +202,6 @@ public class BallControll : MonoBehaviour
 					}
 
 						
-					break;
-
-				//Shuriken;
-				case 3:
 					break;
 
 				//Detector
