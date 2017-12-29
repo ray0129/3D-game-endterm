@@ -42,8 +42,14 @@ public class BallControll : MonoBehaviour
 	//for GameResult UI
 	public GameObject gameResultUI;
 
+    //bow
+    public GameObject bow;
+    public GameObject arrow;
+    float bowPullRate=0.5f;
+    float arrowPullRate = 0.00205f;
 
-	public Text windrangetext;
+
+    public Text windrangetext;
 	private bool windChange;
 
 	// Use this for initialization
@@ -62,8 +68,9 @@ public class BallControll : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-
-		if (true) {
+        bow.GetComponent<SkinnedMeshRenderer>().SetBlendShapeWeight(0, bowPullRate * cSpeed);
+        arrow.transform.localPosition = new Vector3(0,0.12f-arrowPullRate*cSpeed,0);
+        if (true) {
 			if (isShooting == false) {
 				currentTime -= Time.deltaTime;
 				//		TurnTime = Mathf.Clamp (TurnTime, 0f, Mathf.Infinity);
@@ -73,18 +80,20 @@ public class BallControll : MonoBehaviour
 
 				Turn ();
 				currentTime = TurnTime;
-			}
+               
+            }
 			if (Input.GetKey (KeyCode.CapsLock)) {
 				cSpeed = 0;
 				slider.value = 0;
 
 			} 
 			if (Input.GetMouseButton (0) && isShooting == false ) {
-				if (cSpeed < maxSpeed) {
+                if (cSpeed < maxSpeed) {
 					float amount = Time.deltaTime * increase_speed;
 					cSpeed += amount;
 					slider.value += 100 * amount / maxSpeed;
-				} else {
+                    arrow.SetActive(true);
+                } else {
 					cSpeed = maxSpeed;
 				}
 			} else {
@@ -98,8 +107,9 @@ public class BallControll : MonoBehaviour
 					if (windChange) {
 						ChangeWind ();
 						shelter.GetComponent<changeShelter>().shelterChange();
-						//	windChange = false;
-					}
+                        
+                        //	windChange = false;
+                    }
 				}
 
 
@@ -123,6 +133,7 @@ public class BallControll : MonoBehaviour
 					time = 0f;
 					cSpeed = 0f;
 					slider.value = 0;
+                    
 
 				}
 
@@ -141,7 +152,9 @@ public class BallControll : MonoBehaviour
 		TurnCount--;
 		RunTurn++;
 
-		ArrowRemainText.text = "Remain:" + TurnCount.ToString ();
+        arrow.SetActive(false);
+
+        ArrowRemainText.text = "Remain:" + TurnCount.ToString ();
 		if (TurnCount == 0) { // game end
 			//		Debug.Log ("Game End -> Result");
 			EndGame ();
@@ -162,7 +175,7 @@ public class BallControll : MonoBehaviour
 
 		windChange = false;
 
-		float Windmix;
+        float Windmix;
 
 		WindX = WindZ = 0;
 		RandDir = Random.Range (0, 7);
