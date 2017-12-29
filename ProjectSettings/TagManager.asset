@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ball
   - Constraint
+  - Shuriken
   - FireBall
   layers:
   - Default

@@ -19,8 +19,10 @@ public class MineMap : MonoBehaviour {
 
 	public GameObject HitEffect;
 	public GameObject ExplodeEffect;
+	private bool scoreDouble;
 
 	void Start(){
+		scoreDouble = false;
 
 		//itsMine = Random.value < 0.2; //random generate mines
 		rend = GetComponent<Renderer> ();
@@ -81,6 +83,10 @@ public class MineMap : MonoBehaviour {
 				MineManager.hit [i, j] = true;
 				MineManager.mines [i, j].GetComponent<Renderer> ().material.color = hitColor;
 				gameObject.GetComponentInParent<MineManager> ().AddScore (count);
+				if (scoreDouble) {
+					gameObject.GetComponentInParent<MineManager> ().AddScore (count);
+					scoreDouble = false;
+				}
 			}else if(MineManager.hit[i,j] != true){
 				MineManager.mines [i, j].GetComponent<Renderer> ().material.color = hoverColor; //change color
 			}
@@ -131,6 +137,11 @@ public class MineMap : MonoBehaviour {
 			FindObjectOfType<AudioManger> ().Play ("ExplodeSound");
 			GameObject effectD = (GameObject)Instantiate (ExplodeEffect, col.gameObject.transform.position, col.gameObject.transform.rotation);
 		}
+			
+		if (col.CompareTag ("Shuriken") == true) {
+			scoreDouble = true;
+		}
+
 		Destroy (col.gameObject);
         if (BallControll.RunTurn == 1 && itsMine == true)
         {
@@ -158,6 +169,7 @@ public class MineMap : MonoBehaviour {
         {
             recursive (x, y);
         }
+
 
        
 	}
