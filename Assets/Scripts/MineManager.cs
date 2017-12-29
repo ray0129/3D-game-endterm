@@ -82,6 +82,7 @@ public class MineManager : MonoBehaviour {
 	}
 
 	public void AddScore(int count){
+		
 		score += count;
 		ScoreText.text = "Score:" + score.ToString();
 	}

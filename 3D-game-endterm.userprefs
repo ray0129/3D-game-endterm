@@ -1,14 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BallControll.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MineManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\BallControll.cs" Line="72" Column="57" />
-      <File FileName="Assets\Scripts\BallFly00.cs" Line="15" Column="17" />
-      <File FileName="Assets\Scripts\MineMap.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MineManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BallControll.cs" Line="121" Column="7" />
+      <File FileName="Assets\Scripts\BallFly00.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MineMap.cs" Line="131" Column="4" />
+      <File FileName="Assets\Scripts\MineManager.cs" Line="23" Column="31" />
       <File FileName="Assets\barrierMove.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\BallControllformission05.cs" Line="59" Column="3" />
       <File FileName="Assets\Scripts\BallControllformission00.cs" Line="1" Column="1" />
+      <File FileName="Assets\changescence.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BallControllformission01.cs" Line="4" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
