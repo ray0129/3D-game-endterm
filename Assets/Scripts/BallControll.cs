@@ -15,8 +15,7 @@ public class BallControll : MonoBehaviour
 	public Slider slider;
 
 	//wind
-	public static float WindX;
-	//range 0.1~1f
+	public static float WindX;//range 0.1~1f
 	public static float WindY;
 	public static float WindZ;
 	//turn & gameControl
@@ -46,86 +45,120 @@ public class BallControll : MonoBehaviour
 	public Text windrangetext;
 	private bool windChange;
 
+	//change Weapon
+	public static int weaponType; //0 ~ 4
+	public static bool hasShotGun;
+	public static bool hasStaff;
+	public static bool hasShuriken;
+	public static bool hasDetector;
+
+	//funtion open or not
+	public static bool needWind;
+	public static bool needShelter;
+
 	// Use this for initialization
 	void Start ()
 	{
+		//upper for value
+		needWind = true;
+		needShelter = true;
 		slider.value = 0;
-
 		isGameStart = false;
 		currentTime = TurnTime;
+		weaponType = 0;
 
+		//lower for function call
 		ChangeWind ();
 		shelter.GetComponent<changeShelter>().shelterChange();
-
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
 
-		if (true) {
+		if (true) { //isGameStart use here
+			
+			//是否在飛行
 			if (isShooting == false) {
 				currentTime -= Time.deltaTime;
 				//		TurnTime = Mathf.Clamp (TurnTime, 0f, Mathf.Infinity);
 				TimeCountDownText.text = string.Format ("{0:00.00}", currentTime);
 			}
-			if (currentTime < 0) { // time is up
 
+			//時間到 -> 強制換
+			if (currentTime < 0) {
 				Turn ();
 				currentTime = TurnTime;
 			}
-			if (Input.GetKey (KeyCode.CapsLock)) {
-				cSpeed = 0;
-				slider.value = 0;
 
-			} 
-			if (Input.GetMouseButton (0) && isShooting == false ) {
-				if (cSpeed < maxSpeed) {
-					float amount = Time.deltaTime * increase_speed;
-					cSpeed += amount;
-					slider.value += 100 * amount / maxSpeed;
-				} else {
-					cSpeed = maxSpeed;
-				}
-			} else {
 
-				//ball destory time
-				if (temp > 0) {
-					temp -= Time.deltaTime;
-				}
-				if (temp <= 0 || GameObject.FindGameObjectWithTag ("Ball") == null) {
-					isShooting = false;
-					if (windChange) {
-						ChangeWind ();
-						shelter.GetComponent<changeShelter>().shelterChange();
-						//	windChange = false;
+
+
+			switch(weaponType){
+				//basic weapon
+				case 0: 
+					if (Input.GetKey (KeyCode.CapsLock)) {//Capslock取消蓄力
+						cSpeed = 0;
+						slider.value = 0;
 					}
-				}
+					
+					if (Input.GetMouseButton (0) && isShooting == false) {//案住左鍵且球沒在飛 -> 可蓄力 & 丟球
+						if (cSpeed < maxSpeed) {
+							float amount = Time.deltaTime * increase_speed;
+							cSpeed += amount;
+							slider.value += 100 * amount / maxSpeed;
+						} else {
+							cSpeed = maxSpeed;
+						}
+					} else {
+						//ball destory time
+						if (temp > 0) {
+							temp -= Time.deltaTime;
+						}
+						if (temp <= 0 || GameObject.FindGameObjectWithTag ("Ball") == null) {
+							isShooting = false;
+							if (windChange) {
+								Turn ();              // <-------------------- 這邊換turn
+								ChangeWind ();
+								shelter.GetComponent<changeShelter> ().shelterChange ();
+							}
+						}
+						
+						//射擊了
+						if (cSpeed > 0f) {
+							isShooting = true;
+							windChange = true; //下一球需要新的風向
+							
+							//更新剩餘時間並顯示
+							currentTime = TurnTime;   //<------------------這邊更新時間
+							TimeCountDownText.text = string.Format ("{0:00.00}", currentTime);
+							
+							cSpeed += minSpeed;
+							BallFly.speed = cSpeed;
+							temp = Destroy_time;
+							Destroy (Instantiate (balls, this.transform.position, this.transform.rotation), Destroy_time);
+							time = 0f;
+							cSpeed = 0f;
+							slider.value = 0;
+						}
+					}
+					break;
 
+				//ShotGun
+				case 1:
+					break;
 
-				if (cSpeed > 0f) {
+				//Staff;
+				case 2:
+					break;
 
-					windChange = true;
+				//Shuriken;
+				case 3:
+					break;
 
-					isShooting = true;
-					currentTime = TurnTime;
-					TimeCountDownText.text = string.Format ("{0:00.00}", currentTime);
-
-
-					cSpeed += minSpeed;
-					BallFly.speed = cSpeed;
-
-					temp = Destroy_time;
-
-					Destroy (Instantiate (balls, this.transform.position, this.transform.rotation), Destroy_time);
-
-					Turn ();
-					time = 0f;
-					cSpeed = 0f;
-					slider.value = 0;
-
-				}
-
+				//Detector
+				case 4:
+					break;
 			}
 
 		}
@@ -159,8 +192,11 @@ public class BallControll : MonoBehaviour
 	}
 
 	void ChangeWind(){
-
 		windChange = false;
+
+		if (needWind == false) {
+			return;
+		}
 
 		float Windmix;
 
