@@ -95,7 +95,12 @@ public class BallControll : MonoBehaviour
 				currentTime -= Time.deltaTime;
 				//		TurnTime = Mathf.Clamp (TurnTime, 0f, Mathf.Infinity);
 				TimeCountDownText.text = string.Format ("{0:00.00}", currentTime);
-			}
+            }
+            else if (isShooting == true)
+            {
+                //飛行中隱藏arrow
+                arrow.SetActive(false);
+            }
 
 			//時間到 -> 強制換
 			if (currentTime < 0) {

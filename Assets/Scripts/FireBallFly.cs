@@ -7,7 +7,9 @@ public class FireBallFly : MonoBehaviour {
 	static public float speed = 10f;
 	public Rigidbody rb;
 	public GameObject ExplodeEffect;
-	void Start () {
+    private float effectTime = 3;
+
+    void Start () {
 
 		rb = GetComponent<Rigidbody> ();
 		rb.AddForce (transform.forward * speed);
@@ -34,6 +36,7 @@ public class FireBallFly : MonoBehaviour {
 	private void DestoryBall(GameObject g){
 		FindObjectOfType<AudioManger> ().Play ("ExplodeSound");
 		GameObject effectD = (GameObject)Instantiate (ExplodeEffect, transform.position, transform.rotation);
-		Destroy (g);
+        Destroy(effectD.gameObject, effectTime);
+        Destroy (g);
 	}
 }

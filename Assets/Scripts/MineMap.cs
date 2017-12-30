@@ -19,6 +19,7 @@ public class MineMap : MonoBehaviour {
 
 	public GameObject HitEffect;
 	public GameObject ExplodeEffect;
+    private float effectTime=3;
 	private bool scoreDouble;
 
 	void Start(){
@@ -133,10 +134,13 @@ public class MineMap : MonoBehaviour {
 		if(col.CompareTag("Ball") == true || col.CompareTag("Shuriken") == true){
 			FindObjectOfType<AudioManger> ().Play ("HitSound");
 			GameObject effectD = (GameObject)Instantiate (HitEffect, col.gameObject.transform.position, col.gameObject.transform.rotation);
-		}else if(col.CompareTag("FireBall") == true){
+            Destroy(effectD.gameObject, effectTime);
+        }
+        else if(col.CompareTag("FireBall") == true){
 			FindObjectOfType<AudioManger> ().Play ("ExplodeSound");
 			GameObject effectD = (GameObject)Instantiate (ExplodeEffect, col.gameObject.transform.position, col.gameObject.transform.rotation);
-		}
+            Destroy(effectD.gameObject, effectTime);
+        }
 			
 		if (col.CompareTag ("Shuriken") == true) {
 			scoreDouble = true;
