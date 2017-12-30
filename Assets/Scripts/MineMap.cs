@@ -130,7 +130,7 @@ public class MineMap : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
 		Debug.Log("Find myself at:" + x.ToString() + " " + y.ToString() );
-		if(col.CompareTag("Ball") == true){
+		if(col.CompareTag("Ball") == true || col.CompareTag("Shuriken") == true){
 			FindObjectOfType<AudioManger> ().Play ("HitSound");
 			GameObject effectD = (GameObject)Instantiate (HitEffect, col.gameObject.transform.position, col.gameObject.transform.rotation);
 		}else if(col.CompareTag("FireBall") == true){

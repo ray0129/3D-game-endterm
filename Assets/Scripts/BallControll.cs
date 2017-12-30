@@ -60,6 +60,13 @@ public class BallControll : MonoBehaviour
 	public GameObject FireBall;
 	public GameObject Shuriken;
 	public GameObject staff;
+	public GameObject BowAndArrow;
+
+	//bow
+	public GameObject bow;
+	public GameObject arrow;
+	float bowPullRate=0.5f;
+	float arrowPullRate = 0.00205f;
 
 	// Use this for initialization
 	void Start ()
@@ -108,6 +115,12 @@ public class BallControll : MonoBehaviour
 				weaponType = 4;
 			}
 
+			if (weaponType == 0) {
+				BowAndArrow.SetActive (true);
+			} else {
+				BowAndArrow.SetActive (false);
+			}
+
 			if (weaponType == 2) {
 				staff.SetActive (true);
 			} else {
@@ -117,6 +130,10 @@ public class BallControll : MonoBehaviour
 			switch(weaponType){
 				//basic weapon //Shuriken;
 				case 0: case 3:
+					
+					bow.GetComponent<SkinnedMeshRenderer>().SetBlendShapeWeight(0, bowPullRate * cSpeed);
+					arrow.transform.localPosition = new Vector3(0,0.12f-arrowPullRate*cSpeed,0);
+					
 					if (Input.GetKey (KeyCode.CapsLock)) {//Capslock取消蓄力
 						cSpeed = 0;
 						slider.value = 0;
@@ -127,6 +144,8 @@ public class BallControll : MonoBehaviour
 							float amount = Time.deltaTime * increase_speed;
 							cSpeed += amount;
 							slider.value += 100 * amount / maxSpeed;
+							if(weaponType == 0)
+								arrow.SetActive(true);
 						} else {
 							cSpeed = maxSpeed;
 						}
@@ -135,7 +154,7 @@ public class BallControll : MonoBehaviour
 						if (temp > 0) {
 							temp -= Time.deltaTime;
 						}
-						if (temp <= 0 || GameObject.FindGameObjectWithTag ("Ball") == null) {
+						if (temp <= 0 || (GameObject.FindGameObjectWithTag ("Ball") == null && GameObject.FindGameObjectWithTag ("Shuriken") == null )) {
 							isShooting = false;
 							if (windChange) {
 								Turn ();              // <-------------------- 這邊換turn

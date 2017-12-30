@@ -25,6 +25,9 @@ public class BallFly : MonoBehaviour {
 	void FixedUpdate () {
 
 		rb.AddForce (windx, WindY, windz); //world location 
+		if (rb.velocity != Vector3.zero){
+			rb.rotation = Quaternion.LookRotation(rb.velocity)* Quaternion.AngleAxis(90, new Vector3(0, 1, 0));
+		}
 
 	}
 
@@ -33,10 +36,6 @@ public class BallFly : MonoBehaviour {
 			FindObjectOfType<AudioManger> ().Play ("HitSound");
 			GameObject effectD = (GameObject)Instantiate (HitEffect, transform.position, transform.rotation);
 			Destroy (this.gameObject);
-		}
-		if (collision.gameObject.tag == "Cube") {
-			Destroy (this.gameObject);
-			Destroy (collision.gameObject);
 		}
 	}
 
