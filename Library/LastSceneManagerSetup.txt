@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Polylised - Medieval Desert City/Demo/batter.unity
+- path: Assets/Polylised - Medieval Desert City/Demo/ForShotGun.unity
   isLoaded: 1
   isActive: 1
