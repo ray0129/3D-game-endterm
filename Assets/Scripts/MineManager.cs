@@ -20,6 +20,9 @@ public class MineManager : MonoBehaviour {
 
 	public static int ColRow;
 
+    public GameObject shield;
+    public static bool touchShield;
+
     public int MineNumber = 8;
 
 	//batter score
@@ -162,9 +165,24 @@ public class MineManager : MonoBehaviour {
 		HitMineCount++;
 		HitMineText.text = "HitMines" + HitMineCount.ToString();
 
-		//hitMines -> Score -= 2
-		score -= 2;
-		ScoreText.text = "Score:" + score;
+        if (BallControll.hasShield == true)
+        {
+            BallControll.toolUsing = true;
+            touchShield = true;
+            shield.SetActive(true);
+            BallControll.hasShield = false;
+        }
+        else
+        {
+            score -= 3;
+            if (score < 0)
+            {
+             score = 0;
+            }
+		    ScoreText.text = "Score:" + score;
+
+        }
+		
 	}
 
 	private IEnumerator temporarilydeactive(float duration)

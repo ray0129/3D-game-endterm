@@ -6,6 +6,7 @@ public class BallFly : MonoBehaviour {
 	static public float speed = 0.1f;
 	public Rigidbody rb;
 	public GameObject HitEffect;
+    private float effectTime=3;
 	// Use this for initialization
 
 	//wind influence 
@@ -35,6 +36,7 @@ public class BallFly : MonoBehaviour {
 		if (collision.gameObject.tag == "Constraint") {
 			FindObjectOfType<AudioManger> ().Play ("HitSound");
 			GameObject effectD = (GameObject)Instantiate (HitEffect, transform.position, transform.rotation);
+            Destroy(effectD.gameObject, effectTime);
 			Destroy (this.gameObject);
 		}
 	}
@@ -44,7 +46,8 @@ public class BallFly : MonoBehaviour {
 		if (col.CompareTag ("Constraint") == true) {
 			FindObjectOfType<AudioManger> ().Play ("HitSound");
 			GameObject effectD = (GameObject)Instantiate (HitEffect, transform.position, transform.rotation);
-			Destroy (this.gameObject);
+            Destroy(effectD.gameObject, effectTime);
+            Destroy (this.gameObject);
 		}
 	}
 
