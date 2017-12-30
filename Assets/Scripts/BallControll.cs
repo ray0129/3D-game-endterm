@@ -61,12 +61,18 @@ public class BallControll : MonoBehaviour
 	public GameObject Shuriken;
 	public GameObject staff;
 	public GameObject BowAndArrow;
+	public GameObject ShotGun;
+
+	public GameObject Ammo;
 
 	//bow
 	public GameObject bow;
 	public GameObject arrow;
 	float bowPullRate=0.5f;
 	float arrowPullRate = 0.00205f;
+
+	//weapon fire effect
+	public ParticleSystem muzzleFlash;
 
 	// Use this for initialization
 	void Start ()
@@ -119,6 +125,12 @@ public class BallControll : MonoBehaviour
 				BowAndArrow.SetActive (true);
 			} else {
 				BowAndArrow.SetActive (false);
+			}
+
+			if (weaponType == 1) {
+				ShotGun.SetActive (true);	
+			} else {
+				ShotGun.SetActive (false);
 			}
 
 			if (weaponType == 2) {
@@ -189,6 +201,46 @@ public class BallControll : MonoBehaviour
 
 				//ShotGun
 				case 1:
+					if (isShooting == true) {
+						//ball destory time
+						if (temp > 0) {
+							temp -= Time.deltaTime;
+						}
+						if (temp <= 0 || GameObject.FindGameObjectWithTag ("Ammo") == null) {
+							isShooting = false;
+							if (windChange) {
+								Turn ();              // <-------------------- 這邊換turn
+								ChangeWind ();
+								shelter.GetComponent<changeShelter> ().shelterChange ();
+							}
+						}
+					}
+
+					if (Input.GetMouseButtonDown(0) && isShooting == false) {
+						muzzleFlash.Play ();
+
+						isShooting = true;
+						windChange = true; //下一球需要新的風向
+
+						//更新剩餘時間並顯示
+						currentTime = TurnTime;   //<------------------這邊更新時間
+						TimeCountDownText.text = string.Format ("{0:00.00}", currentTime);
+
+						temp = Destroy_time;
+						Vector3 pos = this.transform.position;
+						Quaternion rot = this.transform.rotation;
+						pos += 3*(this.transform.forward); //讓發射點為離槍口較近 & 離玩家較遠
+						
+						float Rx, Ry, Rz;
+						Quaternion Qtemp = new Quaternion();
+						for(int i = 0; i < 5; i++){
+							Rx = Random.Range(-4f, 4f);
+							Ry = Random.Range(-4f, 4f);
+							Rz = Random.Range(-4f, 4f);
+							Qtemp = Quaternion.Euler(Rx, Ry, Rz); //讓發射子彈散開
+							Destroy (Instantiate (Ammo, pos, rot * Qtemp), Destroy_time);
+						}
+					}
 					break;
 
 				//Staff;
@@ -217,7 +269,9 @@ public class BallControll : MonoBehaviour
 						TimeCountDownText.text = string.Format ("{0:00.00}", currentTime);
 						
 						temp = Destroy_time;
+						
 						Destroy (Instantiate (FireBall, this.transform.position, this.transform.rotation), Destroy_time);
+
 					}
 
 						

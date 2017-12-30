@@ -8,6 +8,7 @@ TagManager:
   - Constraint
   - Shuriken
   - FireBall
+  - Ammo
   layers:
   - Default
   - TransparentFX
