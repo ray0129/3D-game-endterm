@@ -21,6 +21,8 @@ public class MineMap : MonoBehaviour {
 	public GameObject ExplodeEffect;
 	private bool scoreDouble;
 
+	public GameObject MineExplodeEffect;
+
 	void Start(){
 		scoreDouble = false;
 
@@ -36,15 +38,21 @@ public class MineMap : MonoBehaviour {
 	}*/
 
 	void recursive(int i, int j){
-		MineManager.used [i, j] = true;
 
 		if (MineManager.mines[i,j].GetComponent<MineMap>().itsMine) {
 			MineManager.mines[i,j].GetComponent<Renderer>().material.color = Mine; //change to mine color
 			gameObject.GetComponentInParent<MineManager> ().HitMines();
+
 			gameObject.GetComponentInParent<MineManager> ().AddScore (0);
+
+			if (MineManager.used [i, j] == false) {
+				Instantiate (MineExplodeEffect, this.transform.position, this.transform.rotation);
+			}
+			MineManager.used [i, j] = true;
+
 		}else {
 			//檢查周圍有無mines
-		
+			MineManager.used [i, j] = true;
 			int count = 0;
 
 			if (i > 0) { //下
