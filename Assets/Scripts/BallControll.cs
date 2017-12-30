@@ -83,21 +83,38 @@ public class BallControll : MonoBehaviour
 		slider.value = 0;
 		isGameStart = false;
 		currentTime = TurnTime;
-		weaponType = 0;
+        if (hasQuiver == true)
+        {
+            weaponType = 6;
+        }
+        else
+        {
+            weaponType = 0;
+        }
 
 		//lower for function call
 		ChangeWind ();
 		shelter.GetComponent<changeShelter>().shelterChange();
-	}
+
+    }
 
 	// Update is called once per frame
 	void Update ()
 	{
 
 		if (true) { //isGameStart use here
-			
-			//是否在飛行
-			if (isShooting == false && toolUsing==false) {
+            if (hasQuiver == true)
+            {
+                toolUsing = true;
+                touchQuiver = true;
+                quiver.SetActive(true);
+                TurnCount += 3;
+                ArrowRemainText.text = "Remain:" + TurnCount.ToString();
+                hasQuiver = false;
+
+            }
+            //是否在飛行
+            if (isShooting == false && toolUsing==false) {
 				currentTime -= Time.deltaTime;
 				//		TurnTime = Mathf.Clamp (TurnTime, 0f, Mathf.Infinity);
 				TimeCountDownText.text = string.Format ("{0:00.00}", currentTime);
@@ -263,20 +280,7 @@ public class BallControll : MonoBehaviour
         if (TurnCount == 0)
         { // game end
           //		Debug.Log ("Game End -> Result");
-            if (hasQuiver == true)
-            {
-                toolUsing = true;
-                touchQuiver = true;
-                quiver.SetActive(true);
-                TurnCount += 3;
-                ArrowRemainText.text = "Remain:" + TurnCount.ToString();
-                hasQuiver = false;
-
-            }
-            else
-            {
                 EndGame();
-            }
         }
 
 	}

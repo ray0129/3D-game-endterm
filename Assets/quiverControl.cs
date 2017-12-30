@@ -5,7 +5,7 @@ using UnityEngine;
 public class quiverControl : MonoBehaviour {
     public float destroy_time;
     private float during_time = 0;
-    private int usingWeapon;
+    private int usingWeapon=0;
 
     // Use this for initialization
     void Start () {
@@ -16,7 +16,6 @@ public class quiverControl : MonoBehaviour {
 	void Update () {
         if (BallControll.touchQuiver == true)
         {
-            usingWeapon = BallControll.weaponType;
             BallControll.weaponType = 6;
             BallControll.touchQuiver = false;
             during_time = 0;
