@@ -22,6 +22,15 @@ public class MineManager : MonoBehaviour {
 
     public int MineNumber = 8;
 
+	//batter score
+
+	private int batter1=0;
+	private int batter2=0;
+	private int batter3=0;
+	private bool triple=false;
+	public Text batterscore;
+	public GameObject batterplus;
+
 	void Awake(){
 		ColRow = (int)Mathf.Sqrt (transform.childCount);
 		mines = new Transform[ColRow,ColRow]; //make the array for wavepoints
@@ -79,11 +88,73 @@ public class MineManager : MonoBehaviour {
             }
             
         }
+		batterplus.SetActive (false);
 	}
 
 	public void AddScore(int count){
-		
+
 		score += count;
+
+		//batter 3 same num
+
+		batter1 = count;
+
+		if (batter2 == batter1&&batter1!=0) {
+			
+			Debug.Log ("b2" + batter1);
+
+			if (batter3 == batter2) {
+				
+				Debug.Log ("b3" + batter2);
+				if (count == 1) {
+					batterscore.text = "+3";
+					StartCoroutine (temporarilydeactive (1f));
+					FindObjectOfType<AudioManger> ().Play ("addmore");
+					Debug.Log ("batter+3");
+					score += 3;
+				}
+				if (count == 2) {
+					batterscore.text = "+6"; 
+					StartCoroutine (temporarilydeactive (1f));
+					FindObjectOfType<AudioManger> ().Play ("addmore");
+					Debug.Log ("batter+6");
+					score += 6;
+				}
+				if (count == 3) {
+					batterscore.text = "+9"; 
+					StartCoroutine (temporarilydeactive (1f));
+					FindObjectOfType<AudioManger> ().Play ("addmore");
+					Debug.Log ("batter+9");
+					score += 9;
+				}
+				batter2 = 0;
+				batter1 = 0;
+			}
+			batter3 = batter2;
+		}
+
+		//batter 1 2 3
+
+		if (triple) {
+			FindObjectOfType<AudioManger> ().Play ("addtriple");
+			triple = false;
+			score += 2 * count;
+			Debug.Log ("triple: " + count);
+			batter1 = batter2 = batter3 = 0;
+			batterplus.SetActive (false);
+		}
+
+		if(batter2==(batter1-1)){
+			if (batter3 == (batter2-1)&&batter3==1) {
+				triple = true;
+				batterscore.text = "next X3";
+				batterplus.SetActive (true);
+			}
+			batter3 = batter2;
+		}
+
+		batter2 = batter1;
+
 		ScoreText.text = "Score:" + score.ToString();
 	}
 
@@ -94,6 +165,13 @@ public class MineManager : MonoBehaviour {
 		//hitMines -> Score -= 2
 		score -= 2;
 		ScoreText.text = "Score:" + score;
+	}
+
+	private IEnumerator temporarilydeactive(float duration)
+	{
+		batterplus.SetActive (true);
+		yield return new WaitForSeconds (duration);
+		batterplus.SetActive (false);
 	}
 }
 

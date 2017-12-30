@@ -41,6 +41,7 @@ public class MineMap : MonoBehaviour {
 		if (MineManager.mines[i,j].GetComponent<MineMap>().itsMine) {
 			MineManager.mines[i,j].GetComponent<Renderer>().material.color = Mine; //change to mine color
 			gameObject.GetComponentInParent<MineManager> ().HitMines();
+			gameObject.GetComponentInParent<MineManager> ().AddScore (0);
 		}else {
 			//檢查周圍有無mines
 		
@@ -91,6 +92,7 @@ public class MineMap : MonoBehaviour {
 				MineManager.mines [i, j].GetComponent<Renderer> ().material.color = hoverColor; //change color
 			}
 			if (count == 0) { //周圍沒mines
+				gameObject.GetComponentInParent<MineManager> ().AddScore (0);
                 MineManager.mines[i, j].GetComponent<Renderer>().material.color = hitColor;
 
                 if (i > 0 && MineManager.used [i - 1, j] == false) { //down
@@ -121,7 +123,7 @@ public class MineMap : MonoBehaviour {
                     recursive(i + 1, j + 1);
                 }
 			} else { //有mines
-				Debug.Log(x.ToString() + " " + y.ToString() + "have " + count.ToString() + " mines");
+			//	Debug.Log(x.ToString() + " " + y.ToString() + "have " + count.ToString() + " mines");
 				MineManager.mines [i, j].GetComponent<MineMap> ().MinesCount.text = "" + count;
 			}
 		}
