@@ -190,6 +190,7 @@ public class BallControll : MonoBehaviour
 							if(weaponType == 0){
 								Destroy (Instantiate (balls, this.transform.position, this.transform.rotation), Destroy_time);
 							}else{
+								FindObjectOfType<AudioManger> ().Play("Flying");
 								Destroy (Instantiate (Shuriken, this.transform.position, this.transform.rotation), Destroy_time);
 							}
 							time = 0f;
