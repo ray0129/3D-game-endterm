@@ -27,7 +27,7 @@ public class BallControll : MonoBehaviour
 	private float temp;
 	public Text TimeCountDownText;
 	public Text ArrowRemainText;
-	public static int RunTurn= 0;
+	public static int RunTurn= 1;
 
 	//shelter
 	public GameObject shelter;
@@ -47,10 +47,16 @@ public class BallControll : MonoBehaviour
 
 	//change Weapon
 	public static int weaponType; //0 ~ 4
-	public static bool hasShotGun;
-	public static bool hasStaff;
-	public static bool hasShuriken;
-	public static bool hasDetector;
+	public static bool hasShotGun=true;
+	public static bool hasStaff=true;
+	public static bool hasShuriken=true;
+	public static bool hasDetector=true;
+
+    public static bool hasShield=true;
+    public static bool hasQuiver=true;
+    public static bool touchQuiver = false;
+    public static bool toolUsing=false;
+    public GameObject quiver;
 
 	//funtion open or not
 	public static bool needWind;
@@ -91,7 +97,7 @@ public class BallControll : MonoBehaviour
 		if (true) { //isGameStart use here
 			
 			//是否在飛行
-			if (isShooting == false) {
+			if (isShooting == false && toolUsing==false) {
 				currentTime -= Time.deltaTime;
 				//		TurnTime = Mathf.Clamp (TurnTime, 0f, Mathf.Infinity);
 				TimeCountDownText.text = string.Format ("{0:00.00}", currentTime);
@@ -110,13 +116,13 @@ public class BallControll : MonoBehaviour
 
 			if(Input.GetKeyDown(KeyCode.Alpha0)){
 				weaponType = 0;
-			}else if (Input.GetKeyDown (KeyCode.Alpha1)) {  //ShotGun
+			}else if (Input.GetKeyDown (KeyCode.Alpha1) && hasShotGun) {  //ShotGun
 				weaponType = 1;
-			}else if(Input.GetKeyDown (KeyCode.Alpha2)){  //staff
+			}else if(Input.GetKeyDown (KeyCode.Alpha2) && hasStaff){  //staff
 				weaponType = 2;
-			}else if(Input.GetKeyDown (KeyCode.Alpha3)){  //shuriken
+			}else if(Input.GetKeyDown (KeyCode.Alpha3) && hasShuriken){  //shuriken
 				weaponType = 3;
-			}else if(Input.GetKeyDown (KeyCode.Alpha4)){  //detecter
+			}else if(Input.GetKeyDown (KeyCode.Alpha4) && hasDetector){  //detecter
 				weaponType = 4;
 			}
 
@@ -231,6 +237,12 @@ public class BallControll : MonoBehaviour
 				//Detector
 				case 4:
 					break;
+                //shield
+                case 5:
+                    break;
+                //quiver
+                case 6:
+                    break;
 			}
 
 		}
@@ -245,12 +257,27 @@ public class BallControll : MonoBehaviour
 	{
 		TurnCount--;
 		RunTurn++;
+        arrow.SetActive(true);
 
 		ArrowRemainText.text = "Remain:" + TurnCount.ToString ();
-		if (TurnCount == 0) { // game end
-			//		Debug.Log ("Game End -> Result");
-			EndGame ();
-		}
+        if (TurnCount == 0)
+        { // game end
+          //		Debug.Log ("Game End -> Result");
+            if (hasQuiver == true)
+            {
+                toolUsing = true;
+                touchQuiver = true;
+                quiver.SetActive(true);
+                TurnCount += 3;
+                ArrowRemainText.text = "Remain:" + TurnCount.ToString();
+                hasQuiver = false;
+
+            }
+            else
+            {
+                EndGame();
+            }
+        }
 
 	}
 
