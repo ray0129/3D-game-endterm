@@ -1,11 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MineMap.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AudioManger.cs">
     <Files>
-      <File FileName="Assets\Scripts\BallControll.cs" Line="220" Column="7" />
-      <File FileName="Assets\AmmoFly.cs" Line="7" Column="22" />
-      <File FileName="Assets\Scripts\MineMap.cs" Line="47" Column="4" />
+      <File FileName="Assets\Scripts\BallControll.cs" Line="1" Column="1" />
+      <File FileName="Assets\AmmoFly.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MineMap.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\MineManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AudioManger.cs" Line="30" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

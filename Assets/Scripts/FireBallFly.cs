@@ -33,7 +33,7 @@ public class FireBallFly : MonoBehaviour {
 
 	private void DestoryBall(GameObject g){
 		FindObjectOfType<AudioManger> ().Play ("ExplodeSound");
-		GameObject effectD = (GameObject)Instantiate (ExplodeEffect, transform.position, transform.rotation);
+		GameObject effectD = (GameObject)Instantiate (ExplodeEffect, this.transform.position, this.transform.rotation);
 		Destroy (g);
 	}
 }

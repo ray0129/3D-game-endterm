@@ -230,7 +230,7 @@ public class BallControll : MonoBehaviour
 						temp = Destroy_time;
 						Vector3 pos = this.transform.position;
 						Quaternion rot = this.transform.rotation;
-						pos += 3*(this.transform.forward); //讓發射點為離槍口較近 & 離玩家較遠
+						Vector3 Dtemp = 3*(this.transform.forward); //讓發射點為離槍口較近 & 離玩家較遠
 						
 						float Rx, Ry, Rz;
 						Quaternion Qtemp = new Quaternion();
@@ -239,7 +239,7 @@ public class BallControll : MonoBehaviour
 							Ry = Random.Range(-4f, 4f);
 							Rz = Random.Range(-4f, 4f);
 							Qtemp = Quaternion.Euler(Rx, Ry, Rz); //讓發射子彈散開
-							Destroy (Instantiate (Ammo, pos, rot * Qtemp), Destroy_time);
+							Destroy (Instantiate (Ammo, pos + Dtemp, rot * Qtemp), Destroy_time);
 						}
 					}
 					break;
