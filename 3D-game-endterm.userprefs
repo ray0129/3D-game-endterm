@@ -1,12 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\turnwithperson.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\StartTeachingText.cs">
     <Files>
-      <File FileName="Assets\Scripts\BallControll.cs" Line="99" Column="4" />
-      <File FileName="Assets\StartTeachingText.cs" Line="26" Column="4" />
-      <File FileName="Assets\Scripts\GameResult.cs" Line="24" Column="31" />
-      <File FileName="Assets\Scripts\PauseMenu.cs" Line="69" Column="3" />
-      <File FileName="Assets\turnwithperson.cs" Line="28" Column="3" />
+      <File FileName="Assets\Scripts\BallControll.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GameResult.cs" Line="1" Column="1" />
+      <File FileName="Assets\turnwithperson.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BallFly.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\barrierMove.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\changeShelter.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\LevelSelector.cs" Line="1" Column="1" />
+      <File FileName="Assets\changescence.cs" Line="1" Column="1" />
+      <File FileName="Assets\quiverControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PauseMenu.cs" Line="23" Column="69" />
+      <File FileName="Assets\Scripts\StartTeachingText.cs" Line="35" Column="20" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

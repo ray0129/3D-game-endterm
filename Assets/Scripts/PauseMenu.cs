@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour {
 
 	public GameObject ui;
-	public bool cursorState;
 
 	// Use this for initialization
 	void Start () {
@@ -19,8 +18,12 @@ public class PauseMenu : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape) || Input.GetKeyDown (KeyCode.P)) {
 			Toggle ();
 		}
-			
-		cursorState = Cursor.visible;
+
+		//to deal with pause bug
+		if (!ui.activeSelf && StartTeachingText.StartTextIsActive == false) {
+			Cursor.visible = false;
+			GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.lockCursor = true;
+		}
 	}
 
 	void OnEnable(){
@@ -44,29 +47,27 @@ public class PauseMenu : MonoBehaviour {
 	}
 
 	public void Toggle(){
-		
+
 		ui.SetActive (!ui.activeSelf);
-		Cursor.visible = !Cursor.visible;
 
 		if (ui.activeSelf) {
-			if (Cursor.lockState != CursorLockMode.None) {
-				Cursor.lockState = CursorLockMode.None;
-			}
+			Cursor.visible = true;
+	//		if (Cursor.lockState != CursorLockMode.None) {
+	//			Cursor.lockState = CursorLockMode.None;
+	//		}
 			GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.lockCursor = false;
 			GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.XSensitivity = 0;
 			GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.YSensitivity = 0;
-
 			Time.timeScale = 0f;
 		} else {
-			if (Cursor.lockState != CursorLockMode.Locked) {
-				Cursor.lockState = CursorLockMode.Locked;
-			}
+			Debug.Log ("IN");
+	//		if (Cursor.lockState != CursorLockMode.Locked) {
+	//			Cursor.lockState = CursorLockMode.Locked;
+	//		}
 			GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.lockCursor = true;
 			GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.XSensitivity = 2;
 			GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.YSensitivity = 2;
-
 			Time.timeScale = 1f;
-//			Debug.Log (Cursor.visible + " is it?");
 		}
 
 

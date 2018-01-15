@@ -71,9 +71,9 @@
      <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\shieldControl.cs" />
      <Compile Include="Assets\Scripts\Sound.cs" />
+     <Compile Include="Assets\Scripts\StartTeachingText.cs" />
      <Compile Include="Assets\Shield Pack Free\MouseRotationScript.cs" />
      <Compile Include="Assets\shurikenfly.cs" />
-     <Compile Include="Assets\StartTeachingText.cs" />
      <Compile Include="Assets\turnwithperson.cs" />
      <None Include="Assets\Shurikens pack\Demo Scene\Prototyping\Shaders\WorldCoordDiffuse.shader" />
      <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
