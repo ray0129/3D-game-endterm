@@ -51,14 +51,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Camera.cs" />
      <Compile Include="Assets\changescence.cs" />
      <Compile Include="Assets\quiverControl.cs" />
+     <Compile Include="Assets\Rotate.cs" />
      <Compile Include="Assets\Scripts\AmmoFly.cs" />
      <Compile Include="Assets\Scripts\AudioManger.cs" />
      <Compile Include="Assets\Scripts\BallControll.cs" />
-     <Compile Include="Assets\Scripts\BallControllformission00.cs" />
-     <Compile Include="Assets\Scripts\BallControllformission01.cs" />
-     <Compile Include="Assets\Scripts\BallControllformission05.cs" />
      <Compile Include="Assets\Scripts\BallFly.cs" />
      <Compile Include="Assets\Scripts\BallFly00.cs" />
      <Compile Include="Assets\Scripts\barrierMove.cs" />
@@ -74,6 +73,7 @@
      <Compile Include="Assets\Scripts\Sound.cs" />
      <Compile Include="Assets\Shield Pack Free\MouseRotationScript.cs" />
      <Compile Include="Assets\shurikenfly.cs" />
+     <Compile Include="Assets\StartTeachingText.cs" />
      <Compile Include="Assets\turnwithperson.cs" />
      <None Include="Assets\Shurikens pack\Demo Scene\Prototyping\Shaders\WorldCoordDiffuse.shader" />
      <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />

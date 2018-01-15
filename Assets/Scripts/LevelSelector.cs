@@ -10,25 +10,25 @@ public class LevelSelector : MonoBehaviour {
 	public void Select(int level){
 		switch (level) {
 			case 1:
-				SceneManager.LoadScene ("Demo_01");
+				SceneManager.LoadScene ("mis01");
 				break;
 			case 2:
-				SceneManager.LoadScene ("");
+				SceneManager.LoadScene ("mis02");
 				break;
 			case 3:
-				SceneManager.LoadScene ("");
+				SceneManager.LoadScene ("mis03");
 				break;
 			case 4:
-				SceneManager.LoadScene ("");
+				SceneManager.LoadScene ("mis04");
 				break;
 			case 5:
-				SceneManager.LoadScene ("");
+				SceneManager.LoadScene ("mis05");
 				break;
 			case 6:
-				SceneManager.LoadScene ("");
+				SceneManager.LoadScene ("mis06");
 				break;
 			case 7:
-				SceneManager.LoadScene ("");
+				SceneManager.LoadScene ("Complete");
 				break;
 			case 8:
 				SceneManager.LoadScene ("");

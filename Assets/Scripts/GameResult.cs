@@ -21,6 +21,7 @@ public class GameResult : MonoBehaviour {
 			Cursor.lockState = CursorLockMode.None;
 	//		Debug.Log (Cursor.lockState);
 		}
+		Debug.Log("in GameResult!");
 		Cursor.visible = true;
 	}
 

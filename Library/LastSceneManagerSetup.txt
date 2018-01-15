@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Polylised - Medieval Desert City/Demo/mis06.unity
+- path: Assets/Polylised - Medieval Desert City/Demo/Complete.unity
   isLoaded: 1
   isActive: 1
