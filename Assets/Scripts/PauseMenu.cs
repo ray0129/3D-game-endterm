@@ -52,18 +52,18 @@ public class PauseMenu : MonoBehaviour {
 
 		if (ui.activeSelf) {
 			Cursor.visible = true;
-	//		if (Cursor.lockState != CursorLockMode.None) {
-	//			Cursor.lockState = CursorLockMode.None;
-	//		}
+			if (Cursor.lockState != CursorLockMode.None) {
+				Cursor.lockState = CursorLockMode.None;
+			}
 			GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.lockCursor = false;
 			GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.XSensitivity = 0;
 			GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.YSensitivity = 0;
 			Time.timeScale = 0f;
 		} else {
 			Debug.Log ("IN");
-	//		if (Cursor.lockState != CursorLockMode.Locked) {
-	//			Cursor.lockState = CursorLockMode.Locked;
-	//		}
+			if (Cursor.lockState != CursorLockMode.Locked) {
+				Cursor.lockState = CursorLockMode.Locked;
+			}
 			GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.lockCursor = true;
 			GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.XSensitivity = 2;
 			GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.YSensitivity = 2;
