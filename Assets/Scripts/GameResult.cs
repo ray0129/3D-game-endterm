@@ -9,6 +9,8 @@ public class GameResult : MonoBehaviour {
 
 
 	public Text ScoreText;
+	public int winScore = 30;
+	public int levelToUnlock = 2;
 
 	// Use this for initialization
 	void Start () {
@@ -33,6 +35,10 @@ public class GameResult : MonoBehaviour {
 		GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.XSensitivity = 0;
 		GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.YSensitivity = 0;
 		Time.timeScale = 0f;
+
+		if (MineManager.score >= winScore) {
+			levelWin ();
+		}
 	}
 
 	public void Retry(){
@@ -49,12 +55,16 @@ public class GameResult : MonoBehaviour {
 	public void NextLevel(){
 		Routine();
 		//need modify, now just temp go to menu
-		SceneManager.LoadScene ("Start_01");
+		SceneManager.LoadScene ("LevelSelect");
 	}
 
 	void Routine(){
 		Time.timeScale = 1f;
 		GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.XSensitivity = 2;
 		GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonController> ().m_MouseLook.YSensitivity = 2;
+	}
+
+	private void levelWin(){
+		PlayerPrefs.SetInt ("levelReached", levelToUnlock);
 	}
 }
