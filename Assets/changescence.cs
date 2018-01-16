@@ -19,6 +19,6 @@ public class changescence : MonoBehaviour {
 	}
     public void start()
     {
-        SceneManager.LoadScene("Demo_01");
+        SceneManager.LoadScene("LevelSelect");
     }
 }

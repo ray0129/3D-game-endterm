@@ -35,3 +35,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Polylised - Medieval Desert City/Demo/Complete.unity
     guid: 1c3aac67cff2f37498058350c82446cf
+  - enabled: 1
+    path: Assets/Polylised - Medieval Desert City/Demo/mis07.unity
+    guid: 89d289095e3f2f14c845bf30302376d0
+  - enabled: 1
+    path: Assets/Polylised - Medieval Desert City/Demo/mis08.unity
+    guid: 9949ea4fa965c6d47852881aaaf14974
+  - enabled: 1
+    path: Assets/Polylised - Medieval Desert City/Demo/mis09.unity
+    guid: 2f8f54216c9d02746a5d6ecf10407c5a

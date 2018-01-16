@@ -18,6 +18,18 @@ public class LevelSelector : MonoBehaviour {
 		}
 	}
 
+	void Update(){
+		if(Input.GetKey (KeyCode.E)){
+			unlock ();
+		}
+	}
+
+	private void unlock(){
+		for (int i = 0; i < levelButtons.Length; i++) {
+			levelButtons [i].interactable = true;
+		}
+	}
+
 	public void Select(int level){
 		switch (level) {
 			case 1:
@@ -39,13 +51,13 @@ public class LevelSelector : MonoBehaviour {
 				SceneManager.LoadScene ("mis06");
 				break;
 			case 7:
-				SceneManager.LoadScene ("Complete");
+				SceneManager.LoadScene ("mis07");
 				break;
 			case 8:
-				SceneManager.LoadScene ("");
+				SceneManager.LoadScene ("mis08");
 				break;
 			case 9:
-				SceneManager.LoadScene ("");
+				SceneManager.LoadScene ("mis09");
 				break;
 			case 10:
 				SceneManager.LoadScene ("");
